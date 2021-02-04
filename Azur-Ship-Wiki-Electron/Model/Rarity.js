@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 
 class Rarity extends Model {
 }
@@ -17,6 +19,8 @@ const RarityAttribute = {
         type: DataTypes.STRING(50)
     }
 }
+
+Rarity.init(RarityAttribute, { ...config, sequelize })
 
 module.exports = {
     Rarity,

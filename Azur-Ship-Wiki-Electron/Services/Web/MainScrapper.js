@@ -5,7 +5,9 @@ const mainUrl = process.env.MAIN_URL;
 const shipListUrl = `${mainUrl}/List_of_Ships`;
 
 function scrapShips(event) {
-    loadShipList(event, shipListUrl);
+    const shipPromise = loadShipList(event, shipListUrl);
+
+    return Promise.resolve(shipPromise);
 }
 
 module.exports = {

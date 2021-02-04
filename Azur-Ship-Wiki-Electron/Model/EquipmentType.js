@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 
 class EquipmentType extends Model {
 }
@@ -14,6 +16,8 @@ const EquipmentTypeAttribute = {
         allowNull: false
     }
 }
+
+EquipmentType.init(EquipmentTypeAttribute, { ...config, sequelize })
 
 module.exports = {
     EquipmentType,

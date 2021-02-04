@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 const { Ship } = require('./Ship');
 const { EquipmentType } = require('./EquipmentType');
 
@@ -34,6 +36,8 @@ const ShipEquipmentMappingAttribute = {
         allowNull: false
     }
 }
+
+ShipEquipmentMapping.init(ShipEquipmentMappingAttribute, { ...config, sequelize })
 
 module.exports = {
     ShipEquipmentMapping,

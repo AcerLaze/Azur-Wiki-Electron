@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 
 class ShipType extends Model {
 }
@@ -17,6 +19,8 @@ const ShipTypeAttribute = {
         type: DataTypes.STRING(10)
     }
 }
+
+ShipType.init(ShipTypeAttribute, { ...config, sequelize })
 
 module.exports = {
     ShipType,

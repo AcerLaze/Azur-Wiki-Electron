@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron');
-const db = require('./Services/DB/DatabaseInterface');
+const { sequelize } = require('./Services/DB/DatabaseInterface');
 require('./Services/MainInterface');
 
 function createWindow() {
@@ -14,13 +14,28 @@ function createWindow() {
 	});
 
 	try {
-		db.initializeDatabase();
+		initializeDatabase();
 		window.loadFile(`dist/AzurShipWiki/index.html`);
 	} catch (error) {
 		console.error(error)
 		window.loadFile('Source/error.html');
 	}
 	
+}
+
+async function initializeDatabase() {
+    try {
+        await sequelize.authenticate();
+        sequelize.sync({
+            alter: true,
+            force: true
+        })
+        console.log('Database Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        return '500'
+    }
+    return '200'
 }
 
 app.on('ready', createWindow);

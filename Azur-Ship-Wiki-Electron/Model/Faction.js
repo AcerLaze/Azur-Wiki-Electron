@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 
 class Faction extends Model {
 }
@@ -20,6 +22,8 @@ const FactionAttribute = {
         type: DataTypes.STRING(50)
     }
 }
+
+Faction.init(FactionAttribute, { ...config, sequelize })
 
 module.exports = {
     Faction,

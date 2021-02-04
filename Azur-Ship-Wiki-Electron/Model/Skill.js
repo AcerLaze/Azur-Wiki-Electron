@@ -1,4 +1,6 @@
 const { DataTypes, Sequelize, Model } = require('sequelize');
+const config = require('./config.json').options;
+const { sequelize } = require('./../Services/DB/DatabaseInterface');
 const { SkillType } = require('./SkillType')
 
 class Skill extends Model {
@@ -26,6 +28,8 @@ const SkillAttribute = {
         }
     }
 }
+
+Skill.init(SkillAttribute, { ...config, sequelize })
 
 module.exports = {
     Skill,
