@@ -92,15 +92,15 @@ async function loadShipList(event, url) {
     event.reply('loadData-reply', 'Fetching Table . . . ');
     let shipTable = Array.from(await page.$$('table.wikitable.sortable.jquery-tablesorter>tbody'));
 
-    let shipPromise = [];
+    let shipPromises = [];
     //Process all table async
     shipTable.forEach((e, index) => {
-        if (index == 3) shipPromise.push(loadShipListTable(event, e, true));
-        else shipPromise.push(loadShipListTable(event, e));
+        if (index == 3) shipPromises.push(loadShipListTable(event, e, true));
+        else shipPromises.push(loadShipListTable(event, e));
     })
 
     let ships = [];
-    await Promise.all(shipPromise).then(shipPromise => {
+    await Promise.all(shipPromises).then(shipPromise => {
         shipPromise.forEach(shipList => {
             ships = [...ships, ...shipList];
         })

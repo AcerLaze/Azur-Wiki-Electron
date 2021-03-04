@@ -1,6 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-    color:#b7b7b7;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+html, body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; height: 100%;}
+
+app-root {
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+}
+
+.header {
+    flex: 0 1 auto;
+}
+.body {
+    flex: 1 1 auto;
 }

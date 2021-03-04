@@ -1,13 +1,29 @@
-<div>
-	<nav class="navbar is-dark">
-		<div class="navbar-brand">
-			<div class="notification is-dark">
-				<p class="title">Azur Lane Ship Wiki</p>
-			</div>
-		</div>
-	</nav>
-</div>
-<div class="mainContent">
-	<app-loader></app-loader>
-</div>
-<router-outlet></router-outlet>
+<mat-toolbar role="heading" class="header">
+	<button mat-icon-button aria-label="More" (click)="sidenav.toggle()" style="margin-right: 20px;">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>Game Book</span>
+</mat-toolbar>
+<mat-sidenav-container class="body">
+	<mat-sidenav #sidenav mode="side" style="width: 225px;">
+		<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+			<mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+				<button mat-button style="width: 100%; text-align: left;" [routerLink]="['/' + node.link]">{{node.name}}</button>
+			</mat-tree-node>
+			<mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+				<button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+					<mat-icon class="mat-icon-rtl-mirror">
+						{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+					</mat-icon>
+				</button>
+				{{node.name}}
+				<button mat-icon-button class="pull-right"><mat-icon>cached</mat-icon></button>
+			</mat-tree-node>
+		</mat-tree>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<router-outlet></router-outlet>
+	</mat-sidenav-content>
+</mat-sidenav-container>
+
+
