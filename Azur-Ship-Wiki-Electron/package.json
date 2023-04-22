@@ -31,7 +31,7 @@
     "ngx-electron": "^2.2.0",
     "puppeteer": "^5.5.0",
     "sequelize": "^6.3.5",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.1.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.5",
